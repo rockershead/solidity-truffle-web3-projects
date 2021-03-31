@@ -1,10 +1,13 @@
 pragma solidity ^0.5.16;
 
+import "./leaseToken.sol";
+
 
 contract houseLease{
     
      
     address payable public holdingWalletAddr;
+    address public token;
     
     
     
@@ -27,14 +30,14 @@ contract houseLease{
         string landlordName;
         string home_addr;
         uint256 timestamp; //timestamp is in unix timestamp
-        uint256 value;//number of wei to pay for house
+        uint256 value;
         address payable _landlordAddr;
         
      }
      
      struct Tenant{
          string tenantName;
-         uint256 value;//in wei
+         uint256 value;
          address payable _tenantAddr;
          
          
@@ -45,9 +48,10 @@ contract houseLease{
     
     
     //the one who deploys the contract is the holding wallet
-    constructor() public{
+    constructor(address payable _holdingWalletAddr,address _token) public{
         
-        holdingWalletAddr= msg.sender;
+        holdingWalletAddr= _holdingWalletAddr;
+        token=_token;
         
     }
     //function called by landlord
@@ -69,14 +73,15 @@ contract houseLease{
     }
     
     //function called by tenant
-    function makePayment(string calldata  leaseId,string calldata  tenantName)  external  {
-        
+    function makePayment(string memory leaseId,string memory tenantName)  public  {
+
+        leaseToken _token=leaseToken(address(token)); 
        
         Landlord memory p = leaseLandlord[leaseId];
         
         require(block.timestamp <= p.timestamp, "Time expired for payment");
         
-        holdingWalletAddr.transfer(p.value);
+        _token.transfer(holdingWalletAddr,p.value);
         
         leaseTenant[leaseId]=Tenant(tenantName,p.value,msg.sender);
         emit tenantPay(msg.sender,leaseId,p.value,p.timestamp);
@@ -104,12 +109,16 @@ contract houseLease{
     
     //money paid out to landlord
     function sendPayout(string memory leaseId) public {
+
+        
         
         require(bytes(door_codes[leaseId]).length!=0);//landlord give door code
         require(msg.sender==holdingWalletAddr);
+
+        leaseToken _token=leaseToken(address(token)); 
         
         Landlord memory p = leaseLandlord[leaseId];
-        p._landlordAddr.transfer(p.value);
+        _token.transfer(p._landlordAddr,p.value);
         
         emit sendPayoutDone(leaseId,p.value);
         
@@ -118,15 +127,18 @@ contract houseLease{
     }
     
     function refund(string memory leaseId) public {
+         Landlord memory p = leaseLandlord[leaseId];
         
-        
-        Landlord memory p = leaseLandlord[leaseId];
-        require(block.timestamp > p.timestamp);
-        require(bytes(door_codes[leaseId]).length==0);//landlord did not give door code
+        require(block.timestamp > p.timestamp,"Time not expired yet.");
+        require(bytes(door_codes[leaseId]).length==0,"Landlord has already given the door code.No refund given.");//landlord did not give door code
         require(msg.sender==holdingWalletAddr);
+
+        leaseToken _token=leaseToken(address(token));
+        
+       
         
         Tenant memory t = leaseTenant[leaseId];
-        t._tenantAddr.transfer(t.value);
+        _token.transfer(t._tenantAddr,t.value);
         emit refundDone(leaseId,t.value);
         
     }

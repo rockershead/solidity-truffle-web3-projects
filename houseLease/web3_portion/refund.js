@@ -13,17 +13,11 @@ var contract=new web3.eth.Contract(myContract.abi,deployedNetwork.address)
 const addresses=await web3.eth.getAccounts()
 
 
-//var instance=contract.at('0x36812138c0e64b241e41aA0576016F16D30E1153')
-var event=contract.events.leaseCreated
 
-// watch for changes
-event.listen(function(error, result){
-    
-    if (!error)
-        console.log(result);
-});
-
-
+//done by owner
+await contract.methods.refund("f7d09c35-9c8a-4190-a373-ba8f1920f948").send({
+from:addresses[1],gas:3000000
+})
 
 
 
