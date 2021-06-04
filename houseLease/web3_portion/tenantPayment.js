@@ -16,8 +16,7 @@ var contract=new web3.eth.Contract(myContract.abi,deployedNetwork.address)
 const addresses=await web3.eth.getAccounts()
 
 
-res1=await contract.methods.getLeaseData("f7d09c35-9c8a-4190-a373-ba8f1920f948").call()
-console.log(res1)
+
 await contract.methods.makePayment("f7d09c35-9c8a-4190-a373-ba8f1920f948","Peter Nierop").send({
 from:addresses[3],gas:3000000
 })

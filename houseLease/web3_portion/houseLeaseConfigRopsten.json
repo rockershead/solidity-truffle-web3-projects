@@ -1,0 +1,364 @@
+{"abi":[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "landlordName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "home_addr",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "createLease",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_holdingWalletAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "doorCode",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "doorCodeSent",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "doorCode",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "giveDoorCode",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "landlordName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "_landlordAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "home_addr",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "leaseCreated",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tenantName",
+				"type": "string"
+			}
+		],
+		"name": "makePayment",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "refund",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "refundDone",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "sendPayout",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "sendPayoutDone",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "tenant",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "tenantPay",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "getDoorCode",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "getLeaseData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "landlordName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "holdingWalletAddr",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "token",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+],
+"metamask_master":{
+"address":"0x446aC590ec501aEccDdAFd1BcaC74ebFf17A7AEd",
+"privateKey":"62D1256F0FC56CDFF8D37996A27849F48AB933ED772BC5B1A2D5107289244AD6"
+},
+"infura":{
+  
+    "ropsten":"https://ropsten.infura.io/v3/940a81bb643c4ccdab6deba46fe81eeb",
+	"ropsten_ws":"wss://ropsten.infura.io/ws/v3/940a81bb643c4ccdab6deba46fe81eeb",
+    "rinkeby":"https://rinkeby.infura.io/v3/940a81bb643c4ccdab6deba46fe81eeb",
+    "mainnet":"https://mainnet.infura.io/v3/940a81bb643c4ccdab6deba46fe81eeb"
+
+},
+"binance_smart_chain":{
+
+  
+   "mainnet":"https://bsc-dataseed1.binance.org:443",
+   "testnet":"https://data-seed-prebsc-1-s1.binance.org:8545"
+
+},
+"contract_address":"0x8d33a30e124e77fb148d0e8d21b46771285cd65a",
+"contract_name":"houseLease"
+
+
+
+
+}

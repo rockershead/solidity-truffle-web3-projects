@@ -13,8 +13,7 @@ contract leaseToken {
 
     uint256 totalSupply_;
     
-    //take note tx.origin is used in the other functions becoz I am using another contract to call this contract.If msg.sender is used, means that it is referring 
-    //to the contract address of the contract calling this contract
+    //take note tx.origin is used in the other functions becoz I am using another contract to call this contract.
     
 
     using SafeMath for uint256;
