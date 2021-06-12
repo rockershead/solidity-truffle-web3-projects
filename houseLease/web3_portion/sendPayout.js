@@ -1,25 +1,30 @@
+//Now we are using ropsten ethereum testnet.
+
 const Web3=require('web3');
-const myContract=require('../build/contracts/houseLease.json');
+const myContract=require('./houseLeaseConfigRopsten.json');
+const HDWalletProvider=require('@truffle/hdwallet-provider');
 
 //implementing events also
 const main=async()=>{
 
-const web3=new Web3("http://localhost:9545")
+  const provider=new HDWalletProvider(
 
-const id=await web3.eth.net.getId()
-const deployedNetwork=myContract.networks[id]
+    myContract.holding_wallet.privateKey,
+    myContract.infura.ropsten
+  )
 
-var contract=new web3.eth.Contract(myContract.abi,deployedNetwork.address)
-const addresses=await web3.eth.getAccounts()
+const web3=new Web3(provider)
 
-
-
-//done by owner
-await contract.methods.sendPayout("f7d09c35-9c8a-4190-a373-ba8f1920f948").send({
-from:addresses[1],gas:3000000
-})
+//abi and contract address
+var contract=new web3.eth.Contract(myContract.abi,myContract.contract_address)
 
 
+
+await contract.methods.sendPayout("5de7eb7d-1abc-4522-8c38-4f33f5cc0347").send({
+    from:myContract.holding_wallet.address,gas:3000000
+    })
+
+    console.log("payout sent")
 
 
 }

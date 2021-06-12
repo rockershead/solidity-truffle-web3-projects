@@ -9,7 +9,7 @@ const main=async()=>{
 
   const provider=new HDWalletProvider(
 
-    myContract.owner.privateKey,
+    myContract.tenant.privateKey,
     myContract.infura.ropsten
   )
 
@@ -18,13 +18,12 @@ const web3=new Web3(provider)
 //abi and contract address
 var contract=new web3.eth.Contract(myContract.abi,myContract.contract_address)
 
+lease_id=await contract.methods.tenants(myContract.tenant.uid).call()
+console.log(lease_id)
 
+res1=await contract.methods.getDoorCode("3Hz1jaYhetOtRP3EvCPNHDCFpdw2",lease_id).call()
 
-await contract.methods.giveDoorCode("5467","5de7eb7d-1abc-4522-8c38-4f33f5cc0347").send({
-    from:myContract.owner.address,gas:3000000
-    })
-
-    console.log("door code set")
+    console.log(res1)
 
 
 }

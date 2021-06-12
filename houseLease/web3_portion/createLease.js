@@ -9,7 +9,7 @@ const main=async()=>{
 
   const provider=new HDWalletProvider(
 
-    myContract.metamask_master.privateKey,
+    myContract.owner.privateKey,
     myContract.infura.ropsten
   )
 
@@ -28,13 +28,13 @@ var contract=new web3.eth.Contract(myContract.abi,myContract.contract_address)
 //user 1 create lease
 
 
-var number_of_LTOK=12000
-await contract.methods.createLease("Jane","Blk 507 Woodlands St 11 #06-76",1617199800,BigInt(Number(number_of_LTOK)*Math.pow(10,18)),"f7d09c35-9c8a-4190-a373-ba8f1920f945").send({
-from:myContract.metamask_master.address
-})
+//var number_of_LTOK=12000
+//await contract.methods.createLease(myContract.owner.uid,"Peter","Blk 508 Woodlands St 11 #06-77",1623311313,BigInt(Number(number_of_LTOK)*Math.pow(10,18)),"5de7eb7d-1abc-4522-8c38-4f33f5cc0347").send({
+//from:myContract.owner.address
+//})
 
 
-
+//console.log("done")
 
 
 
@@ -48,12 +48,13 @@ from:myContract.metamask_master.address
 //})
 
 
-var res1=await contract.methods.getLeaseData("f7d09c35-9c8a-4190-a373-ba8f1920f945").call()
-console.log(res1)
+//var res1=await contract.methods.getLeaseData("9a090665-ffb2-4699-85ac-bde8151efba6").call()
+//console.log(res1)
 //var res2=await contract.methods.getLeaseData("2178720d-d2b6-4d03-b866-71dba95c1021").call()
 ////console.log(res2)
 
-
+var res1=await contract.methods.listAllLeaseIds().call()
+console.log(res1)
     
 
 

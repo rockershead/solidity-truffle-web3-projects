@@ -4,6 +4,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
+				"name": "uid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "landlordName",
 				"type": "string"
 			},
@@ -144,6 +149,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
+				"name": "uid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "leaseId",
 				"type": "string"
 			},
@@ -263,6 +273,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
+				"name": "tenant_uid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "leaseId",
 				"type": "string"
 			}
@@ -292,8 +307,23 @@
 		"outputs": [
 			{
 				"internalType": "string",
+				"name": "uid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
 				"name": "landlordName",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "home_addr",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -322,6 +352,117 @@
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "LeaseIds",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "listAllLeaseIds",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "owner_uid",
+				"type": "string"
+			}
+		],
+		"name": "listLandlordLeaseIds",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "leaseId",
+						"type": "string"
+					}
+				],
+				"internalType": "struct houseLease.owner_lease_id[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "owners",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "tenants",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "token",
 		"outputs": [
@@ -340,6 +481,26 @@
 "address":"0x446aC590ec501aEccDdAFd1BcaC74ebFf17A7AEd",
 "privateKey":"62D1256F0FC56CDFF8D37996A27849F48AB933ED772BC5B1A2D5107289244AD6"
 },
+"owner":{
+ "uid":"3BmVMJhUffhBdL0aOvYuBzngIRp1",
+ "address":"0x8B4c460b984199bf6529B0c8F19C33aF559EF091",
+ "privateKey":"23371c81f49746da9cc57b2130878655a19591709b8de38dfd637a227773a7e0"
+
+},
+
+"tenant":{
+	"uid":"3Hz1jaYhetOtRP3EvCPNHDCFpdw2",
+	"address":"0xfE798F0674a873d5aA28ADa1705C4c44873fCBA3",
+	"privateKey":"66cd4da95efab2e32173380b2f02927c55f346bba54c6662361f886a56742034"
+
+
+},
+
+"holding_wallet":{
+
+   "address":"0xd466c503a34b644f2C3e66cA406f6ce728E06364",
+   "privateKey":"b9e3f8277f7f31374fdbd75b95a49064add778fdb612d7dec843bb1da187ee69"
+},
 "infura":{
   
     "ropsten":"https://ropsten.infura.io/v3/940a81bb643c4ccdab6deba46fe81eeb",
@@ -355,7 +516,8 @@
    "testnet":"https://data-seed-prebsc-1-s1.binance.org:8545"
 
 },
-"contract_address":"0x8d33a30e124e77fb148d0e8d21b46771285cd65a",
+"contract_address":"0x68a82b5807512c219041f6b2e5fd2f3ee634eb9c",
+"lease_token_contract_address":"0x931147bfc1c2183bf764b673fb28cccf575e0628",
 "contract_name":"houseLease"
 
 
