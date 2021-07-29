@@ -23,7 +23,7 @@ var id=0
 var promises=[];
 
 var res1=await contract.methods.listAllLeaseIds().call()    //array of leaseIds
-
+console.log(res1)
 
 res1.forEach( leaseId=> {
 

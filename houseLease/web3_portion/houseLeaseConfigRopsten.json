@@ -1,12 +1,6 @@
 {"abi":[
 	{
-		"constant": false,
 		"inputs": [
-			{
-				"internalType": "string",
-				"name": "uid",
-				"type": "string"
-			},
 			{
 				"internalType": "string",
 				"name": "landlordName",
@@ -35,7 +29,96 @@
 		],
 		"name": "createLease",
 		"outputs": [],
-		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "deleteLandlordLeaseId",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "deleteTenantLeaseId",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "door_code",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"internalType": "address payable",
+				"name": "tenantAddr",
+				"type": "address"
+			}
+		],
+		"name": "giveDoorCode",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tenantName",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "age",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "race",
+				"type": "string"
+			}
+		],
+		"name": "makePayment",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			}
+		],
+		"name": "sendPayout",
+		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -52,7 +135,6 @@
 				"type": "address"
 			}
 		],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -80,26 +162,6 @@
 		],
 		"name": "doorCodeSent",
 		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "doorCode",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "leaseId",
-				"type": "string"
-			}
-		],
-		"name": "giveDoorCode",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -145,32 +207,6 @@
 		"type": "event"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "uid",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "leaseId",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "tenantName",
-				"type": "string"
-			}
-		],
-		"name": "makePayment",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "string",
@@ -180,7 +216,6 @@
 		],
 		"name": "refund",
 		"outputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -204,21 +239,6 @@
 		"type": "event"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "leaseId",
-				"type": "string"
-			}
-		],
-		"name": "sendPayout",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -235,6 +255,31 @@
 			}
 		],
 		"name": "sendPayoutDone",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address payable",
+				"name": "_tenantAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "leaseId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "tenantCancelLease",
 		"type": "event"
 	},
 	{
@@ -269,13 +314,7 @@
 		"type": "event"
 	},
 	{
-		"constant": true,
 		"inputs": [
-			{
-				"internalType": "string",
-				"name": "tenant_uid",
-				"type": "string"
-			},
 			{
 				"internalType": "string",
 				"name": "leaseId",
@@ -290,12 +329,10 @@
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "string",
@@ -305,11 +342,6 @@
 		],
 		"name": "getLeaseData",
 		"outputs": [
-			{
-				"internalType": "string",
-				"name": "uid",
-				"type": "string"
-			},
 			{
 				"internalType": "string",
 				"name": "landlordName",
@@ -329,29 +361,17 @@
 				"internalType": "uint256",
 				"name": "value",
 				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "holdingWalletAddr",
-		"outputs": [
+			},
 			{
-				"internalType": "address payable",
-				"name": "",
+				"internalType": "address",
+				"name": "owner_wallet_address",
 				"type": "address"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -367,12 +387,10 @@
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "listAllLeaseIds",
 		"outputs": [
@@ -382,19 +400,11 @@
 				"type": "string[]"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "owner_uid",
-				"type": "string"
-			}
-		],
+		"inputs": [],
 		"name": "listLandlordLeaseIds",
 		"outputs": [
 			{
@@ -410,59 +420,69 @@
 				"type": "tuple[]"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
+		"inputs": [],
+		"name": "listTenantLeaseIds",
+		"outputs": [
 			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
-		"name": "owners",
-		"outputs": [
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "string",
 				"name": "leaseId",
 				"type": "string"
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "tenants",
+		"name": "listTenants",
 		"outputs": [
 			{
-				"internalType": "string",
+				"components": [
+					{
+						"internalType": "string",
+						"name": "tenantName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_tenantAddr",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "age",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "race",
+						"type": "string"
+					}
+				],
+				"internalType": "struct houseLease.Tenant[]",
 				"name": "",
-				"type": "string"
+				"type": "tuple[]"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "token",
 		"outputs": [
@@ -472,7 +492,6 @@
 				"type": "address"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	}
@@ -485,6 +504,7 @@
  "uid":"3BmVMJhUffhBdL0aOvYuBzngIRp1",
  "address":"0x8B4c460b984199bf6529B0c8F19C33aF559EF091",
  "privateKey":"23371c81f49746da9cc57b2130878655a19591709b8de38dfd637a227773a7e0"
+              
 
 },
 
@@ -516,8 +536,256 @@
    "testnet":"https://data-seed-prebsc-1-s1.binance.org:8545"
 
 },
-"contract_address":"0x68a82b5807512c219041f6b2e5fd2f3ee634eb9c",
+"contract_address":"0xdCCf4117Bba8Eec8bc6d064366430Ff45Ae5F2e2",
 "lease_token_contract_address":"0x931147bfc1c2183bf764b673fb28cccf575e0628",
+"leaseTokenAbi":[
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "tokenOwner",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "delegate",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "delegate",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numTokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
 "contract_name":"houseLease"
 
 
